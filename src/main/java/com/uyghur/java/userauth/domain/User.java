@@ -27,7 +27,7 @@ public class User {
     @NotBlank( message = "Email is mandatory" )
     private String email;
 
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
     private String roles;

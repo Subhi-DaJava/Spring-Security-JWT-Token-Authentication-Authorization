@@ -24,11 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userByUsername = userRepository.findByUsername(username);
-        log.info("User has been successfully found by username:{%s} from CustomUserDetailsService".formatted(username));
-
         // This line uses the map method of the Optional object to transform the found userByUserName(User) into a CustomUserDetails object.
-        return userByUsername
+        UserDetails userDetails = userByUsername
                 .map(CustomUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("User with username:{%s} not found, in CustomUserDetailsService".formatted(username)));
+        log.info("User has been successfully found by username:{%s} from CustomUserDetailsService".formatted(username));
+        return  userDetails;
+
     }
 }
